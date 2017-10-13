@@ -1,0 +1,3 @@
+rootProject.name = 'taxi_mobile'
+
+include ':app'
