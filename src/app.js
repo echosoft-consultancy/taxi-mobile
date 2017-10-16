@@ -1,38 +1,32 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- * @flow
- */
-
 import React, {Component} from 'react';
 import {
-	Platform,
 	StyleSheet,
-	Text,
 	View
 } from 'react-native';
 import MapView from 'react-native-maps';
+import {MenuComponent} from "./components/menu/component";
 
 const styles = StyleSheet.create({
 	container: {
 		...StyleSheet.absoluteFillObject,
-		height: 400,
-		width: 400,
+		flex: 1,
 		justifyContent: 'flex-end',
 		alignItems: 'center',
 	},
 	map: {
 		...StyleSheet.absoluteFillObject,
 	},
+	menuComponent: {
+		flex: 1,
+		flexDirection: 'row',
+		justifyContent: 'flex-end',
+	}
 });
 
 module.exports = class MyApp extends Component {
 	render() {
-		const { region } = this.props;
-		console.log(region);
-
 		return (
-			<View style ={styles.container}>
+			<View style={styles.container}>
 				<MapView
 					style={styles.map}
 					region={{
@@ -43,6 +37,7 @@ module.exports = class MyApp extends Component {
 					}}
 				>
 				</MapView>
+				<MenuComponent style={styles.menuComponent}/>
 			</View>
 		);
 	}
