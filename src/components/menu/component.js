@@ -23,7 +23,6 @@ export class MenuComponent extends Component {
 			</ActionButton>
 			</View>
 		);
-
 	}
 }
 

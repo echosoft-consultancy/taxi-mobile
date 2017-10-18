@@ -16,14 +16,33 @@ const styles = StyleSheet.create({
 
 export class MapComponent extends Component {
 
-
-
 	constructor() {
 		super();
+
 		this.state = {
-			latitude: null,
-			longitude: null
+			latitude: 0,
+			longitude: 0,
+			latitudeDelta: 0,
+			longitudeDelta: 0
 		};
+		// get initial position otherwise start in middle of pacific
+		navigator.geolocation.getCurrentPosition((pos) => {
+			this.setState({
+				latitude: pos.coords.latitude,
+				longitude: pos.coords.longitude,
+				latitudeDelta: 0.015,
+				longitudeDelta: 0.0121,
+			})
+		});
+		// when movement detected update state
+		navigator.geolocation.watchPosition(pos => {
+			this.setState({
+				latitude: pos.coords.latitude,
+				longitude: pos.coords.longitude,
+				latitudeDelta: 0.015,
+				longitudeDelta: 0.0121
+			})
+		});
 	}
 
 	render() {
@@ -34,21 +53,17 @@ export class MapComponent extends Component {
 					region={{
 						latitude: this.state.latitude,
 						longitude: this.state.longitude,
-						latitudeDelta: 0.015,
-						longitudeDelta: 0.0121,
+						latitudeDelta: this.state.latitudeDelta,
+						longitudeDelta: this.state.longitudeDelta
 					}}
 				>
+					<MapView.Marker coordinate={{
+						latitude: this.state.latitude,
+						longitude: this.state.longitude
+					}}/>
 				</MapView>
 			</View>
 		);
 	}
 
-	componentDidMount() {
-		navigator.geolocation.getCurrentPosition((pos) => {
-			this.setState({
-				latitude: pos.coords.latitude,
-				longitude: pos.coords.longitude
-			});
-		});
-	}
 }
