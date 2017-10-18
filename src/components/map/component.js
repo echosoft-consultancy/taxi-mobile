@@ -30,19 +30,24 @@ export class MapComponent extends Component {
 			this.setState({
 				latitude: pos.coords.latitude,
 				longitude: pos.coords.longitude,
-				latitudeDelta: 0.015,
-				longitudeDelta: 0.0121,
+				latitudeDelta: 0,
+				longitudeDelta: 0,
 			})
 		});
+	}
+
+	onRegionChange() {
 		// when movement detected update state
 		navigator.geolocation.watchPosition(pos => {
 			this.setState({
 				latitude: pos.coords.latitude,
 				longitude: pos.coords.longitude,
-				latitudeDelta: 0.015,
-				longitudeDelta: 0.0121
-			})
-		});
+				latitudeDelta: 0,
+				longitudeDelta: 0
+			});
+		}, err => {
+			console.log(err);
+		}, {distanceFilter: 10, enableHighAccuracy: true, maximumAge: 5000});
 	}
 
 	render() {
@@ -56,6 +61,7 @@ export class MapComponent extends Component {
 						latitudeDelta: this.state.latitudeDelta,
 						longitudeDelta: this.state.longitudeDelta
 					}}
+					onRegionChange={this.onRegionChange()}
 				>
 					<MapView.Marker coordinate={{
 						latitude: this.state.latitude,
