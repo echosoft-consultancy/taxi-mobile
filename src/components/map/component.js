@@ -16,17 +16,22 @@ const styles = StyleSheet.create({
 
 export class MapComponent extends Component {
 
-	constructor() {
-		super();
+	constructor(props) {
+		super(props);
 
 		this.state = {
 			latitude: 0,
 			longitude: 0,
 			latitudeDelta: 0,
-			longitudeDelta: 0
+			longitudeDelta: 0,
+			setLocation: props.setLocation
 		};
 		// get initial position otherwise start in middle of pacific
 		navigator.geolocation.getCurrentPosition((pos) => {
+			this.state.setLocation({
+				latitude: pos.coords.latitude,
+				longitude: pos.coords.longitude
+			})
 			this.setState({
 				latitude: pos.coords.latitude,
 				longitude: pos.coords.longitude,
@@ -39,6 +44,10 @@ export class MapComponent extends Component {
 	onRegionChange() {
 		// when movement detected update state
 		navigator.geolocation.watchPosition(pos => {
+			this.state.setLocation({
+				latitude: pos.coords.latitude,
+				longitude: pos.coords.longitude
+			})
 			this.setState({
 				latitude: pos.coords.latitude,
 				longitude: pos.coords.longitude,

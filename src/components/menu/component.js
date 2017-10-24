@@ -4,11 +4,19 @@ import React, {Component} from 'react';
 import {StyleSheet, View} from "react-native";
 
 export class MenuComponent extends Component {
+
+	constructor(props) {
+		super(props)
+		this.state = {
+      hailTaxi: props.hailTaxi
+     };
+	}
+
 	render() {
 		return (
 			<View style={styles.actionMenuButton}>
 			<ActionButton buttonColor="#ea1f11" hideShadow={true}>
-				<ActionButton.Item buttonColor='#9b59b6' title="Hail Taxi" textContainerStyle={styles.actionButtonIconText} onPress={() => console.log("notes tapped!")}>
+				<ActionButton.Item buttonColor='#9b59b6' title="Hail Taxi" textContainerStyle={styles.actionButtonIconText} onPress={this.state.hailTaxi}>
 					<Icon name="cab" style={styles.actionButtonIcon} />
 				</ActionButton.Item>
 				<ActionButton.Item buttonColor='#3498db' title="Notifications" textContainerStyle={styles.actionButtonIconText} onPress={() => {}}>
@@ -43,5 +51,3 @@ const styles = StyleSheet.create({
 		opacity: 0.7
 	}
 });
-
-
