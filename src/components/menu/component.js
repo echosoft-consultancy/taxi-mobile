@@ -6,29 +6,44 @@ import {StyleSheet, View} from "react-native";
 export class MenuComponent extends Component {
 
 	constructor(props) {
-		super(props)
+		super(props);
 		this.state = {
-      hailTaxi: props.hailTaxi
-     };
+			hailTaxi: props.hailTaxi,
+			navigation: this.props.navigation
+
+		};
 	}
 
 	render() {
+		const {navigate} = this.state.navigation;
 		return (
 			<View style={styles.actionMenuButton}>
-			<ActionButton buttonColor="#ea1f11" hideShadow={true}>
-				<ActionButton.Item buttonColor='#9b59b6' title="Hail Taxi" textContainerStyle={styles.actionButtonIconText} onPress={this.state.hailTaxi}>
-					<Icon name="cab" style={styles.actionButtonIcon} />
-				</ActionButton.Item>
-				<ActionButton.Item buttonColor='#3498db' title="Notifications" textContainerStyle={styles.actionButtonIconText} onPress={() => {}}>
-					<Icon name="bell-o" style={styles.actionButtonIcon} />
-				</ActionButton.Item>
-				<ActionButton.Item buttonColor='#1abc9c' title="Friends" textContainerStyle={styles.actionButtonIconText} onPress={() => {}}>
-					<Icon name="user-o" style={styles.actionButtonIcon} />
-				</ActionButton.Item>
-				<ActionButton.Item buttonColor="#9c8d79" title="Settings" textContainerStyle={styles.actionButtonIconText} onPress={() => {}}>
-					<Icon name="gear" style={styles.actionButtonIcon} />
-				</ActionButton.Item>
-			</ActionButton>
+				<ActionButton buttonColor="#ea1f11" hideShadow={true}>
+					<ActionButton.Item buttonColor='#9b59b6' title="Hail Taxi"
+					                   textContainerStyle={styles.actionButtonIconText}
+					                   onPress={() => {
+
+					                   }}>
+						<Icon name="cab" style={styles.actionButtonIcon}/>
+					</ActionButton.Item>
+					<ActionButton.Item buttonColor='#3498db' title="Notifications"
+					                   textContainerStyle={styles.actionButtonIconText} onPress={() => {
+					}
+					}>
+						<Icon name="bell-o" style={styles.actionButtonIcon}/>
+					</ActionButton.Item>
+					<ActionButton.Item buttonColor='#1abc9c' title="Friends"
+					                   textContainerStyle={styles.actionButtonIconText} onPress={() => {
+					}}>
+						<Icon name="user-o" style={styles.actionButtonIcon}/>
+					</ActionButton.Item>
+					<ActionButton.Item buttonColor="#9c8d79" title="Settings"
+					                   textContainerStyle={styles.actionButtonIconText} onPress={() => {
+						navigate('Settings')
+					}}>
+						<Icon name="gear" style={styles.actionButtonIcon}/>
+					</ActionButton.Item>
+				</ActionButton>
 			</View>
 		);
 	}

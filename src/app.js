@@ -13,7 +13,7 @@ const styles = StyleSheet.create({
 	}
 });
 
-module.exports = class MyApp extends Component {
+export class MainComponent extends Component {
 
 	setLocation(location) {
 		console.log('setting location')
@@ -23,23 +23,23 @@ module.exports = class MyApp extends Component {
 	hailTaxi() {
 		console.log('hailing taxi')
 		axios.post('http://192.168.86.152:4567/passenger/ride', {
-	    lat: this.state.location.latitude,
-	    lon: this.state.location.longitude
-	  })
-	  .then(function (response) {
-	    console.log(response);
-	  })
-	  .catch(function (error) {
-	    console.log(error);
-	  });
+			lat: this.state.location.latitude,
+			lon: this.state.location.longitude
+		})
+			.then(function (response) {
+				console.log(response);
+			})
+			.catch(function (error) {
+				console.log(error);
+			});
 	}
 
 	render() {
 		return (
 			<View style={styles.container}>
 				<MapComponent setLocation={this.setLocation.bind(this)}/>
-				<MenuComponent hailTaxi={this.hailTaxi.bind(this)}/>
+				<MenuComponent hailTaxi={this.hailTaxi.bind(this)} navigation={this.props.navigation}/>
 			</View>
 		);
 	}
-};
+}
