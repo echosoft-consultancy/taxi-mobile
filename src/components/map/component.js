@@ -35,8 +35,8 @@ export class MapComponent extends Component {
 			this.setState({
 				latitude: pos.coords.latitude,
 				longitude: pos.coords.longitude,
-				latitudeDelta: 0,
-				longitudeDelta: 0,
+				latitudeDelta: 0.005,
+				longitudeDelta: 0.005,
 			})
 		});
 	}
@@ -50,9 +50,7 @@ export class MapComponent extends Component {
 			})
 			this.setState({
 				latitude: pos.coords.latitude,
-				longitude: pos.coords.longitude,
-				latitudeDelta: 0,
-				longitudeDelta: 0
+				longitude: pos.coords.longitude
 			});
 		}, err => {
 			console.log(err);
