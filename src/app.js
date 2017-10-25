@@ -5,6 +5,7 @@ import {
 } from 'react-native';
 import {MenuComponent} from "./components/menu/component";
 import {MapComponent} from "./components/map/component";
+import axios from 'axios';
 
 const styles = StyleSheet.create({
 	container: {
@@ -21,7 +22,16 @@ module.exports = class MyApp extends Component {
 
 	hailTaxi() {
 		console.log('hailing taxi')
-		console.log(`location: ${JSON.stringify(this.state.location)}`)
+		axios.post('http://192.168.86.152:4567/passenger/ride', {
+	    lat: this.state.location.latitude,
+	    lon: this.state.location.longitude
+	  })
+	  .then(function (response) {
+	    console.log(response);
+	  })
+	  .catch(function (error) {
+	    console.log(error);
+	  });
 	}
 
 	render() {
